@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+/ (root)
+  index.html
+  sleepexperience/
+      index.html
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
