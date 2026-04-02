@@ -1,3 +1,6 @@
+Index · HTML
+Copiar
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,13 +36,13 @@ a{color:inherit;text-decoration:none}
 }
 html{scroll-behavior:smooth}
 body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
-
+ 
 /* CURSOR */
 .cursor{position:fixed;width:8px;height:8px;background:var(--white);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s}
 .cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(240,236,228,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s cubic-bezier(.16,1,.3,1),height .3s cubic-bezier(.16,1,.3,1),border-color .3s}
 body.hovered .cursor{width:16px;height:16px}
 body.hovered .cursor-ring{width:56px;height:56px;border-color:rgba(240,236,228,0.6)}
-
+ 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:28px 48px;transition:padding .4s,background .4s,border-color .4s;border-bottom:1px solid transparent}
 nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(12px);border-bottom-color:var(--border)}
@@ -58,7 +61,7 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .mobile-menu.open{display:flex}
 .mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:40px;font-style:italic;color:var(--white);transition:color .2s}
 .mobile-menu a:hover{color:var(--accent)}
-
+ 
 /* HERO — PARALLAX */
 #hero{position:relative;height:100vh;height:100svh;min-height:640px;display:flex;align-items:flex-end;overflow:hidden}
 .hero-image{position:absolute;inset:-15% 0;background:url('your-photo.JPEG') center 20%/cover no-repeat;filter:grayscale(100%) contrast(1.1) brightness(.85);will-change:transform}
@@ -70,7 +73,7 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .hero-scroll{position:absolute;bottom:44px;right:64px;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s 1.2s forwards}
 .hero-scroll span{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl}
 .scroll-line{width:1px;height:56px;background:linear-gradient(var(--muted),transparent);animation:scrollPulse 2.4s 1.5s infinite}
-
+ 
 /* ABOUT */
 #about{background:var(--panel);padding:120px 64px;position:relative;overflow:hidden}
 #about::before{content:'ABOUT';position:absolute;top:48px;right:48px;font-family:'Cormorant Garamond',serif;font-size:130px;font-weight:300;color:rgba(255,255,255,0.025);pointer-events:none;line-height:1}
@@ -81,17 +84,17 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .about-body p{font-size:15px;line-height:1.88;color:var(--cream);margin-bottom:20px}
 .about-body p:last-child{margin-bottom:0}
 .about-body strong{color:var(--white);font-weight:400}
-
+ 
 /* STAT COUNTER */
 .stat-block{margin-top:48px;padding-top:40px;border-top:1px solid var(--border);display:flex;align-items:baseline;gap:12px}
 .stat-number{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,64px);font-weight:300;color:var(--white);line-height:1;letter-spacing:-.02em}
 .stat-suffix{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,2.5vw,36px);font-weight:300;color:var(--accent2)}
 .stat-label{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-top:8px}
-
+ 
 /* DSP COUNTER */
 .dsp-counter{margin:32px 0 28px;padding:28px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .dsp-counter-row{display:flex;align-items:baseline;gap:6px}
-
+ 
 /* IMDb BUTTON */
 .imdb-wrap{max-width:1100px;margin:3px auto 0;background:var(--panel)}
 .imdb-btn{display:flex;align-items:center;justify-content:space-between;padding:22px 32px;transition:background .35s;cursor:none}
@@ -104,12 +107,12 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .imdb-arrow svg{width:16px;height:16px;color:var(--muted);transition:color .3s}
 .imdb-btn:hover .imdb-arrow{border-color:rgba(255,255,255,0.3);transform:rotate(45deg)}
 .imdb-btn:hover .imdb-arrow svg{color:var(--white)}
-
+ 
 /* PREMIUM DIVIDER */
 .section-divider{display:flex;align-items:center;gap:24px;padding:48px 64px}
 .divider-line{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,0.12),transparent)}
 .divider-label{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--muted);white-space:nowrap;flex-shrink:0}
-
+ 
 #film{background:var(--black);padding:120px 64px}
 .film-header{max-width:1100px;margin:0 auto 48px}
 .about-cta{display:inline-flex;align-items:center;gap:12px;margin-top:24px;font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--white);border-bottom:1px solid var(--border);padding-bottom:8px;transition:border-color .3s,gap .3s}
@@ -123,14 +126,14 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .film-item:hover .film-overlay{opacity:1;transform:translateY(0)}
 .film-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white);font-weight:400}
 .film-type{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-top:4px}
-
+ 
 /* VIDEOS */
 .video-section{background:var(--panel);padding:3px 0 0}
 .video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;max-width:1100px;margin:0 auto}
 .vid-embed{position:relative;padding-bottom:56.25%;overflow:hidden}
 .vid-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .vid-label{padding:13px 16px;background:var(--dark);border-top:1px solid var(--border);font-family:'Geist Mono',monospace;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-
+ 
 /* DSP */
 #dsp{background:var(--panel2);padding:120px 64px}
 .dsp-inner{max-width:760px;margin:0 auto}
@@ -139,7 +142,7 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .platforms{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px}
 .platform-tag{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(143,168,184,0.22);padding:8px 14px;transition:border-color .3s,background .3s}
 .platform-tag:hover{border-color:var(--accent);background:rgba(143,168,184,0.07)}
-
+ 
 /* PARTNERS */
 #partners{background:var(--black);padding:80px 0;border-top:1px solid var(--border)}
 .partners-top{max-width:1100px;margin:0 auto 40px;padding:0 64px}
@@ -152,7 +155,7 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .m-item a:hover{color:var(--white)}
 .m-sep{color:var(--border);font-size:18px;padding:0 16px;user-select:none}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
+ 
 /* CONTACT */
 #contact{background:var(--panel2);padding:140px 64px;border-top:1px solid var(--border)}
 .contact-inner{max-width:1100px;margin:0 auto}
@@ -170,7 +173,7 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .contact-social{display:flex;gap:32px}
 .contact-social a{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);transition:color .3s}
 .contact-social a:hover{color:var(--white)}
-
+ 
 /* FOOTER */
 footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .f-logo{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
@@ -178,9 +181,9 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
 .f-links{display:flex;gap:24px}
 .f-links button{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:none;transition:color .3s;padding:0}
 .f-links button:hover{color:var(--white)}
-
-
-
+ 
+ 
+ 
 /* COOKIE BANNER */
 #cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:8000;padding:28px 48px;background:rgba(10,12,18,0.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:40px;transform:translateY(100%);animation:slideUpBanner .6s 1.8s cubic-bezier(.16,1,.3,1) forwards}
 #cookie-banner.hidden{display:none}
@@ -192,7 +195,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
 .cookie-btn:hover{color:var(--white);border-color:rgba(255,255,255,0.25)}
 .cookie-btn.accept{background:var(--white);color:var(--black);border-color:var(--white)}
 .cookie-btn.accept:hover{background:var(--cream);border-color:var(--cream)}
-
+ 
 /* POLICY MODALS */
 .policy-modal{display:none;position:fixed;inset:0;z-index:9000;background:rgba(8,8,8,0.92);backdrop-filter:blur(16px);align-items:center;justify-content:center;padding:24px}
 .policy-modal.open{display:flex}
@@ -207,19 +210,41 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
 .policy-body p{margin-bottom:14px}
 .policy-body a{color:var(--accent)}
 .policy-updated{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:28px;display:block}
-
+ 
 /* REVEAL */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .72s ease,transform .72s ease}
 .reveal.visible{opacity:1;transform:none}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
-
+ 
 /* KEYFRAMES */
 @keyframes fadeUp{to{opacity:1;transform:none}}
 @keyframes fadeIn{to{opacity:1}}
 @keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.25)}}
 @keyframes slideUpBanner{to{transform:translateY(0)}}
 @keyframes scaleIn{from{opacity:0;transform:scale(.96) translateY(12px)}to{opacity:1;transform:none}}
-
+ 
+/* BROADCAST PRESENCE */
+.broadcast-wrap{max-width:1100px;margin:0 auto;padding:36px 0 0}
+.broadcast-title{margin-bottom:28px}
+.broadcast-inner{display:flex;align-items:center;justify-content:center;gap:0;border-top:1px solid var(--border);padding-top:32px;position:relative}
+.broadcast-item{display:flex;flex-direction:column;align-items:center;gap:7px;padding:0 48px;position:relative;opacity:0;transform:translateY(10px);transition:opacity .8s ease,transform .8s ease}
+.broadcast-item.visible{opacity:1;transform:none}
+.broadcast-item:nth-child(1){transition-delay:.1s}
+.broadcast-item:nth-child(3){transition-delay:.22s}
+.broadcast-item:nth-child(5){transition-delay:.34s}
+.broadcast-item:nth-child(7){transition-delay:.46s}
+.broadcast-sep{width:1px;height:28px;background:var(--border);flex-shrink:0;opacity:0;transition:opacity .8s ease .5s}
+.broadcast-sep.visible{opacity:1}
+.broadcast-label{font-family:'Geist Mono',monospace;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+.broadcast-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:var(--cream);letter-spacing:.04em;white-space:nowrap;transition:color .3s}
+.broadcast-item a{display:contents}
+.broadcast-item a .broadcast-name{transition:color .3s}
+.broadcast-item a:hover .broadcast-name{color:var(--white)}
+ 
+/* line draw on scroll */
+.broadcast-inner::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,0.09),transparent);transition:width 1.1s cubic-bezier(.16,1,.3,1)}
+.broadcast-inner.line-drawn::before{width:100%}
+ 
 /* RESPONSIVE */
 @media(max-width:900px){
   nav{padding:22px 24px}nav.scrolled{padding:16px 24px}
@@ -234,6 +259,10 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
   #dsp{padding:80px 24px}
   #partners{padding:60px 0}.partners-top{padding:0 24px;margin-bottom:32px}
   #contact{padding:80px 24px}
+  .broadcast-wrap{padding:28px 0 0}
+  .broadcast-inner{flex-wrap:wrap;gap:24px;padding-top:28px}
+  .broadcast-item{padding:0 20px}
+  .broadcast-sep{display:none}
   .btn-circle{width:44px;height:44px}.btn-circle svg{width:16px;height:16px}
   footer{flex-direction:column;gap:14px;text-align:center;padding:24px}
   #cookie-banner{flex-direction:column;align-items:flex-start;padding:24px;gap:20px}
@@ -246,10 +275,10 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
 </style>
 </head>
 <body>
-
+ 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
-
+ 
 <!-- NAV -->
 <nav id="navbar">
   <a href="#" class="nav-logo">Lemos</a>
@@ -264,7 +293,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
     <span></span><span></span><span></span>
   </button>
 </nav>
-
+ 
 <div class="mobile-menu" id="mobileMenu">
   <a href="#about" class="mob-link">About</a>
   <a href="#film" class="mob-link">Film</a>
@@ -272,7 +301,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
   <a href="#partners" class="mob-link">Partners</a>
   <a href="#contact" class="mob-link">Contact</a>
 </div>
-
+ 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-image" id="heroImage"></div>
@@ -290,7 +319,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
     <span>Scroll</span>
   </div>
 </section>
-
+ 
 <!-- ABOUT -->
 <section id="about">
   <div class="about-grid">
@@ -313,7 +342,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
     </div>
   </div>
 </section>
-
+ 
 <!-- FILM & MEDIA -->
 <section id="film">
   <div class="film-header">
@@ -350,7 +379,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
       </div>
     </div>
   </div>
-
+ 
   <!-- IMDb button -->
   <div class="imdb-wrap reveal">
     <a href="https://www.imdb.com/name/nm15962386/" target="_blank" rel="noopener" class="imdb-btn">
@@ -365,14 +394,42 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
       </span>
     </a>
   </div>
-
+ 
+  <!-- Broadcast presence -->
+  <div class="broadcast-wrap">
+    <div class="section-label broadcast-title reveal">Global Radio Presence</div>
+    <div class="broadcast-inner">
+      <div class="broadcast-item">
+        <span class="broadcast-label">BBC Radio · UK</span>
+        <a href="https://www.bbc.co.uk/programmes/m002g2wv" target="_blank" rel="noopener">
+          <span class="broadcast-name">The Sleeping Forecast</span>
+        </a>
+      </div>
+      <div class="broadcast-sep"></div>
+      <div class="broadcast-item">
+        <span class="broadcast-label">KEXP · USA</span>
+        <span class="broadcast-name">Pacific Notions</span>
+      </div>
+      <div class="broadcast-sep"></div>
+      <div class="broadcast-item">
+        <span class="broadcast-label">Antena 1 · Portugal</span>
+        <span class="broadcast-name">Posto de Escuta</span>
+      </div>
+      <div class="broadcast-sep"></div>
+      <div class="broadcast-item">
+        <span class="broadcast-label">Dublin South FM · Ireland</span>
+        <span class="broadcast-name">The Power of Dreams</span>
+      </div>
+    </div>
+  </div>
+ 
   <!-- Premium divider -->
   <div class="section-divider">
     <div class="divider-line"></div>
     <div class="divider-label">Selected works on screen</div>
     <div class="divider-line"></div>
   </div>
-
+ 
   <div class="video-section">
     <div class="video-grid">
       <div class="reveal">
@@ -402,7 +459,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
     </div>
   </div>
 </section>
-
+ 
 <!-- DSP -->
 <section id="dsp">
   <div class="dsp-inner">
@@ -431,7 +488,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
     </div>
   </div>
 </section>
-
+ 
 <!-- PARTNERS -->
 <section id="partners">
   <div class="partners-top reveal">
@@ -478,7 +535,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
     </div>
   </div>
 </section>
-
+ 
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-inner">
@@ -500,7 +557,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
     </div>
   </div>
 </section>
-
+ 
 <!-- FOOTER -->
 <footer>
   <span class="f-logo">Lemos</span>
@@ -510,7 +567,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
     <button onclick="openModal('cookies')">Cookies</button>
   </div>
 </footer>
-
+ 
 <!-- COOKIE BANNER -->
 <div id="cookie-banner">
   <p class="cookie-text">
@@ -524,7 +581,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
     <button class="cookie-btn accept" onclick="acceptCookies()">Accept all</button>
   </div>
 </div>
-
+ 
 <!-- PRIVACY POLICY MODAL -->
 <div class="policy-modal" id="modal-privacy">
   <div class="policy-box">
@@ -551,7 +608,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
     </div>
   </div>
 </div>
-
+ 
 <!-- COOKIES POLICY MODAL -->
 <div class="policy-modal" id="modal-cookies">
   <div class="policy-box">
@@ -579,7 +636,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
     </div>
   </div>
 </div>
-
+ 
 <script>
 /* CURSOR */
 const cursor=document.getElementById('cursor');
@@ -596,11 +653,11 @@ document.querySelectorAll('a,button,.film-item,.platform-tag').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hovered'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hovered'));
 });
-
+ 
 /* NAV */
 const navbar=document.getElementById('navbar');
 window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',scrollY>60));
-
+ 
 /* MOBILE MENU */
 const hamburger=document.getElementById('hamburger');
 const mobileMenu=document.getElementById('mobileMenu');
@@ -612,7 +669,7 @@ document.querySelectorAll('.mob-link').forEach(l=>l.addEventListener('click',()=
   hamburger.classList.remove('open');
   mobileMenu.classList.remove('open');
 }));
-
+ 
 /* PARALLAX HERO */
 const heroImage=document.getElementById('heroImage');
 function updateParallax(){
@@ -624,13 +681,26 @@ function updateParallax(){
   }
 }
 window.addEventListener('scroll',updateParallax,{passive:true});
-
+ 
 /* SCROLL REVEAL */
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
 },{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
+ 
+/* BROADCAST PRESENCE ANIMATION */
+const broadcastObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.broadcast-item,.broadcast-sep').forEach(el=>el.classList.add('visible'));
+      e.target.classList.add('line-drawn');
+      broadcastObs.unobserve(e.target);
+    }
+  });
+},{threshold:.4});
+const broadcastInner=document.querySelector('.broadcast-inner');
+if(broadcastInner)broadcastObs.observe(broadcastInner);
+ 
 /* ANIMATED COUNTER */
 function animateCounter(el,target,duration){
   let start=null;
@@ -657,13 +727,13 @@ if(counterEl){
   },{threshold:.3});
   counterObs.observe(counterEl);
 }
-
+ 
 /* COOKIES */
 const banner=document.getElementById('cookie-banner');
 function acceptCookies(){localStorage.setItem('lemos_cookie_consent','accepted');banner.classList.add('hidden');}
 function declineCookies(){localStorage.setItem('lemos_cookie_consent','essential');banner.classList.add('hidden');}
 if(localStorage.getItem('lemos_cookie_consent')){banner.style.animation='none';banner.classList.add('hidden');}
-
+ 
 /* MODALS */
 function openModal(type){document.getElementById('modal-'+type).classList.add('open');document.body.style.overflow='hidden';}
 function closeModal(type){document.getElementById('modal-'+type).classList.remove('open');document.body.style.overflow='';}
