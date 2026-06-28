@@ -92,19 +92,81 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .dsp-counter{margin:32px 0 28px;padding:28px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .dsp-counter-row{display:flex;align-items:baseline;gap:6px}
  
-/* IMDb BUTTON */
-.imdb-wrap{max-width:1100px;margin:3px auto 0;background:var(--panel)}
-.imdb-btn{display:flex;align-items:center;justify-content:space-between;padding:22px 32px;transition:background .35s;cursor:none}
-.imdb-btn:hover{background:var(--panel2)}
-.imdb-left{display:flex;align-items:center;gap:20px}
-.imdb-badge{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.15em;background:#f5c518;color:#000;padding:4px 8px}
-.imdb-text{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:var(--cream);transition:color .3s}
-.imdb-btn:hover .imdb-text{color:var(--white)}
-.imdb-arrow{width:40px;height:40px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .35s,transform .45s cubic-bezier(.16,1,.3,1)}
-.imdb-arrow svg{width:16px;height:16px;color:var(--muted);transition:color .3s}
-.imdb-btn:hover .imdb-arrow{border-color:rgba(255,255,255,0.3);transform:rotate(45deg)}
-.imdb-btn:hover .imdb-arrow svg{color:var(--white)}
- 
+/* IMDb CTA */
+.imdb-wrap {
+  max-width: 1100px;
+  margin: 48px auto 0;
+  border: 1px solid var(--border);
+  padding: 48px 48px 44px;
+  background: var(--panel);
+  position: relative;
+}
+.imdb-eyebrow {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.imdb-cta-inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+}
+.imdb-cta-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.imdb-badge {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .15em;
+  background: #f5c518;
+  color: #000;
+  padding: 5px 10px;
+  display: inline-block;
+  width: fit-content;
+}
+.imdb-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.15;
+  margin: 0;
+}
+.imdb-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--cream);
+  border: 1px solid var(--border);
+  padding: 16px 28px;
+  white-space: nowrap;
+  transition: background .3s, color .3s, border-color .3s;
+  flex-shrink: 0;
+}
+.imdb-cta-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform .4s cubic-bezier(.16,1,.3,1);
+}
+.imdb-cta-btn:hover {
+  background: var(--cream);
+  color: #000;
+  border-color: var(--cream);
+}
+.imdb-cta-btn:hover svg {
+  transform: translateX(4px);
+}
+
 /* PREMIUM DIVIDER */
 .section-divider{display:flex;align-items:center;gap:24px;padding:48px 64px}
 .divider-line{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,0.12),transparent)}
@@ -342,91 +404,82 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
  
 <!-- FILM & MEDIA -->
 <section id="film">
- <div class="film-header">
-   <div class="section-label reveal">Film &amp; Media</div>
-   <h2 class="section-title reveal d1">Scoring <br></h2>
- </div>
- <div class="poster-grid">
-   <div class="film-item reveal">
-     <img src="poster-balas-bolinhos.jpg" alt="Balas e Bolinhos">
-     <div class="film-overlay">
-       <div class="film-title">Balas &amp; Bolinhos</div>
-       <div class="film-type">Feature Film &middot; Original Score</div>
-     </div>
-   </div>
-   <div class="film-item reveal d1">
-     <img src="poster-1506.jpg" alt="1506 The Lisbon Genocide">
-     <div class="film-overlay">
-       <div class="film-title">1506 &mdash; The Lisbon Genocide</div>
-       <div class="film-type">Documentary &middot; Original Score</div>
-     </div>
-   </div>
-   <div class="film-item reveal d1">
-     <img src="poster-2000.jpg" alt="2000 Kidnapped Jewish Children">
-     <div class="film-overlay">
-       <div class="film-title">2000 Kidnapped Jewish Children</div>
-       <div class="film-type">Documentary &middot; Original Score</div>
-     </div>
-   </div>
-   <div class="film-item reveal d2">
-     <img src="poster-som-da-alma.jpg" alt="Som da Alma">
-     <div class="film-overlay">
-       <div class="film-title">Som da Alma</div>
-       <div class="film-type">Film &middot; Original Score</div>
-     </div>
-   </div>
- </div>
+  <div class="film-header">
+    <div class="section-label reveal">Film &amp; Media</div>
+    <h2 class="section-title reveal d1">Scoring <br>for film &amp; documentary.</h2>
+  </div>
+  <div class="poster-grid">
+    <div class="film-item reveal">
+      <img src="poster-balas-bolinhos.jpg" alt="Balas e Bolinhos">
+      <div class="film-overlay">
+        <div class="film-title">Balas &amp; Bolinhos</div>
+        <div class="film-type">Feature Film &middot; Original Score</div>
+      </div>
+    </div>
+    <div class="film-item reveal d1">
+      <img src="poster-1506.jpg" alt="1506 The Lisbon Genocide">
+      <div class="film-overlay">
+        <div class="film-title">1506 &mdash; The Lisbon Genocide</div>
+        <div class="film-type">Documentary &middot; Original Score</div>
+      </div>
+    </div>
+    <div class="film-item reveal d1">
+      <img src="poster-2000.jpg" alt="2000 Kidnapped Jewish Children">
+      <div class="film-overlay">
+        <div class="film-title">2000 Kidnapped Jewish Children</div>
+        <div class="film-type">Documentary &middot; Original Score</div>
+      </div>
+    </div>
+    <div class="film-item reveal d2">
+      <img src="poster-som-da-alma.jpg" alt="Som da Alma">
+      <div class="film-overlay">
+        <div class="film-title">Som da Alma</div>
+        <div class="film-type">Film &middot; Original Score</div>
+      </div>
+    </div>
+  </div>
 
- <!-- IMDb button -->
- <div class="imdb-wrap reveal">
-   <a href="https://www.imdb.com/name/nm15962386/" target="_blank" rel="noopener" class="imdb-btn">
-     <span class="imdb-left">
-       <span class="imdb-badge">IMDb</span>
-       <span class="imdb-text">View scoring credits</span>
-     </span>
-     <span class="imdb-arrow">
-       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-         <path d="M5 12h14M13 6l6 6-6 6"/>
-       </svg>
-     </span>
-   </a>
- </div>
+  <!-- IMDb CTA -->
+  <div class="imdb-wrap reveal">
+    <div class="imdb-eyebrow">Scoring Credits</div>
+    <div class="imdb-cta-inner">
+      <div class="imdb-cta-left">
+        <span class="imdb-badge">IMDb</span>
+        <p class="imdb-headline">View the full<br>scoring catalogue.</p>
+      </div>
+      <a href="https://www.imdb.com/name/nm15962386/" target="_blank" rel="noopener" class="imdb-cta-btn">
+        View Credits
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </a>
+    </div>
+  </div>
 
- <!-- Advertising header -->
- <div class="film-header">
-   <div class="section-label reveal"></div>
-   <h2 class="section-title reveal d1">Advertising <br> </h2>
- </div>
+  <!-- Advertising -->
+  <div class="film-header" style="margin-top:80px">
+    <div class="section-label reveal">Advertising</div>
+    <h2 class="section-title reveal d1">Advertising <br>&amp; branded content.</h2>
+  </div>
 
- <div class="video-section">
-   <div class="video-grid">
-     <div class="reveal">
-       <div class="vid-embed">
-         <iframe src="https://www.youtube.com/embed/6D1Jf35QnyU" title="Turismo Centro de Portugal" allowfullscreen loading="lazy"></iframe>
-       </div>
-       <div class="vid-label">Turismo Centro de Portugal</div>
-     </div>
-     <div class="reveal d1">
-       <div class="vid-embed">
-         <iframe src="https://www.youtube.com/embed/fQDsRQYAYO0" title="O Regresso a Casa FC Porto" allowfullscreen loading="lazy"></iframe>
-       </div>
-       <div class="vid-label">O Regresso a Casa &mdash; FC Porto</div>
-     </div>
-     <div class="reveal d1">
-       <div class="vid-embed">
-         <iframe src="https://www.youtube.com/embed/SaCVWhcRMrU" title="Futebol Clube do Porto 21/22" allowfullscreen loading="lazy"></iframe>
-       </div>
-       <div class="vid-label">Futebol Clube do Porto 21/22</div>
-     </div>
-     <div class="reveal d2">
-       <div class="vid-embed">
-         <iframe src="https://www.youtube.com/embed/sBKnAAoPgRo" title="Shooting an Ad to save water" allowfullscreen loading="lazy"></iframe>
-       </div>
-       <div class="vid-label">Shooting an Ad to Save Water</div>
-     </div>
-   </div>
- </div>
+  <div class="video-section">
+    <div class="video-grid">
+      <div class="reveal">
+        <div class="vid-embed">
+          <iframe src="https://www.youtube.com/embed/6D1Jf35QnyU" title="Turismo Centro de Portugal" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="vid-label">Turismo Centro de Portugal</div>
+      </div>
+      <div class="reveal d1">
+        <div class="vid-embed">
+          <iframe src="https://www.youtube.com/embed/fQDsRQYAYO0" title="O Regresso a Casa FC Porto" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="vid-label">O Regresso a Casa &mdash; FC Porto</div>
+      </div>
+    </div>
+  </div>
 </section>
+
 
  
 <!-- DSP -->
