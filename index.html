@@ -32,7 +32,7 @@ a{color:inherit;text-decoration:none}
   --muted:#7a7870;--accent:#8fa8b8;--accent2:#c4a882;
 }
 html{scroll-behavior:smooth}
-body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden}
+body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden;cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='2' fill='%23f0ece4'/%3E%3Cline x1='12' y1='4' x2='12' y2='8' stroke='%23f0ece4' stroke-width='0.8'/%3E%3Cline x1='12' y1='16' x2='12' y2='20' stroke='%23f0ece4' stroke-width='0.8'/%3E%3Cline x1='4' y1='12' x2='8' y2='12' stroke='%23f0ece4' stroke-width='0.8'/%3E%3Cline x1='16' y1='12' x2='20' y2='12' stroke='%23f0ece4' stroke-width='0.8'/%3E%3C/svg%3E") 12 12, crosshair}
  
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:28px 48px;transition:padding .4s,background .4s,border-color .4s;border-bottom:1px solid transparent}
@@ -53,14 +53,22 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:40px;font-style:italic;color:var(--white);transition:color .2s}
 .mobile-menu a:hover{color:var(--accent)}
  
-/* HERO — PARALLAX */
+/* HERO */
 #hero{position:relative;height:100vh;height:100svh;min-height:640px;display:flex;align-items:flex-end;overflow:hidden}
 .hero-image{position:absolute;inset:-15% 0;background:url('your-photo.JPEG') center 20%/cover no-repeat;filter:grayscale(100%) contrast(1.1) brightness(.85);will-change:transform}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,8,0.45) 0%,rgba(8,8,8,0.15) 40%,rgba(8,8,8,0.6) 100%)}
 .hero-bottom{position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to bottom,transparent,var(--black))}
 .hero-content{position:relative;z-index:2;padding:0 64px 88px;max-width:860px}
-.hero-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,6vw,82px);font-weight:300;line-height:1.08;letter-spacing:-.01em;opacity:0;transform:translateY(28px);animation:fadeUp .9s .3s forwards}
+ 
+/* HERO QUOTE — line by line animation */
+.hero-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,6vw,82px);font-weight:300;line-height:1.08;letter-spacing:-.01em}
 .hero-quote em{font-style:italic;color:var(--cream)}
+.hero-line{display:block;overflow:hidden}
+.hero-line-inner{display:block;opacity:0;transform:translateY(100%);animation:lineUp .85s cubic-bezier(.16,1,.3,1) forwards}
+.hero-line:nth-child(1) .hero-line-inner{animation-delay:.2s}
+.hero-line:nth-child(2) .hero-line-inner{animation-delay:.42s}
+.hero-line:nth-child(3) .hero-line-inner{animation-delay:.62s}
+ 
 .hero-scroll{position:absolute;bottom:44px;right:64px;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s 1.2s forwards}
 .hero-scroll span{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl}
 .scroll-line{width:1px;height:56px;background:linear-gradient(var(--muted),transparent);animation:scrollPulse 2.4s 1.5s infinite}
@@ -87,84 +95,26 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .dsp-counter-row{display:flex;align-items:baseline;gap:6px}
  
 /* IMDb CTA */
-.imdb-wrap {
-  max-width: 1100px;
-  margin: 48px auto 0;
-  border: 1px solid var(--border);
-  padding: 48px 48px 44px;
-  background: var(--panel);
-  position: relative;
-}
-.imdb-eyebrow {
-  font-family: 'Geist Mono', monospace;
-  font-size: 10px;
-  letter-spacing: .18em;
-  color: var(--muted);
-  text-transform: uppercase;
-  margin-bottom: 28px;
-}
-.imdb-cta-inner {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 32px;
-}
-.imdb-cta-left {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.imdb-badge {
-  font-family: 'Geist Mono', monospace;
-  font-size: 10px;
-  letter-spacing: .15em;
-  background: #f5c518;
-  color: #000;
-  padding: 5px 10px;
-  display: inline-block;
-  width: fit-content;
-}
-.imdb-headline {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(28px, 4vw, 42px);
-  font-weight: 300;
-  color: var(--cream);
-  line-height: 1.15;
-  margin: 0;
-}
-.imdb-cta-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  font-family: 'Geist Mono', monospace;
-  font-size: 11px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--cream);
-  border: 1px solid var(--border);
-  padding: 16px 28px;
-  white-space: nowrap;
-  transition: background .3s, color .3s, border-color .3s;
-  flex-shrink: 0;
-}
-.imdb-cta-btn svg {
-  width: 16px;
-  height: 16px;
-  transition: transform .4s cubic-bezier(.16,1,.3,1);
-}
-.imdb-cta-btn:hover {
-  background: var(--cream);
-  color: #000;
-  border-color: var(--cream);
-}
-.imdb-cta-btn:hover svg {
-  transform: translateX(4px);
-}
+.imdb-wrap{max-width:1100px;margin:48px auto 0;border:1px solid var(--border);padding:48px 48px 44px;background:var(--panel);position:relative}
+.imdb-eyebrow{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-bottom:28px}
+.imdb-cta-inner{display:flex;align-items:flex-end;justify-content:space-between;gap:32px}
+.imdb-cta-left{display:flex;flex-direction:column;gap:20px}
+.imdb-badge{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.15em;background:#f5c518;color:#000;padding:5px 10px;display:inline-block;width:fit-content}
+.imdb-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,42px);font-weight:300;color:var(--cream);line-height:1.15;margin:0}
+.imdb-cta-btn{display:inline-flex;align-items:center;gap:14px;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cream);border:1px solid var(--border);padding:16px 28px;white-space:nowrap;transition:background .3s,color .3s,border-color .3s;flex-shrink:0}
+.imdb-cta-btn svg{width:16px;height:16px;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.imdb-cta-btn:hover{background:var(--cream);color:#000;border-color:var(--cream)}
+.imdb-cta-btn:hover svg{transform:translateX(4px)}
  
-/* PREMIUM DIVIDER */
+/* ANIMATED DIVIDER */
 .section-divider{display:flex;align-items:center;gap:24px;padding:48px 64px}
 .divider-line{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,0.12),transparent)}
 .divider-label{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--muted);white-space:nowrap;flex-shrink:0}
+ 
+/* DRAW LINE — reusable animated border-top */
+.draw-line{position:relative}
+.draw-line::after{content:'';position:absolute;top:0;left:0;width:0;height:1px;background:rgba(255,255,255,0.1);transition:width 1.2s cubic-bezier(.16,1,.3,1)}
+.draw-line.line-drawn::after{width:100%}
  
 #film{background:var(--black);padding:120px 64px}
 .film-header{max-width:1100px;margin:0 auto 48px}
@@ -175,8 +125,10 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .film-item{position:relative;overflow:hidden}
 .film-item img{width:100%;display:block;aspect-ratio:2/3;object-fit:cover;filter:saturate(.8) brightness(.88);transition:transform .65s cubic-bezier(.16,1,.3,1),filter .4s}
 .film-item:hover img{transform:scale(1.04);filter:saturate(1) brightness(.95)}
-.film-overlay{position:absolute;bottom:0;left:0;right:0;padding:56px 24px 24px;background:linear-gradient(transparent,rgba(8,8,8,.88));opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
-.film-item:hover .film-overlay{opacity:1;transform:translateY(0)}
+ 
+/* OVERLAY — always partially visible, intensifies on hover */
+.film-overlay{position:absolute;bottom:0;left:0;right:0;padding:56px 24px 24px;background:linear-gradient(transparent,rgba(8,8,8,.75));opacity:0.35;transform:none;transition:opacity .4s}
+.film-item:hover .film-overlay{opacity:1}
 .film-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white);font-weight:400}
 .film-type{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-top:4px}
  
@@ -202,7 +154,8 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .marquee-track{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:22px 0}
 .marquee-inner{display:flex;align-items:center;width:max-content;animation:marquee 28s linear infinite}
 .marquee-track:hover .marquee-inner{animation-play-state:paused}
-.m-item{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--cream);white-space:nowrap;padding:0 4px}
+.m-item{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--cream);white-space:nowrap;padding:0 4px;transition:color .3s}
+.m-item:hover{color:var(--white)}
 .m-item.featured{font-style:italic;color:var(--accent2)}
 .m-item a{color:inherit;transition:color .2s}
 .m-item a:hover{color:var(--white)}
@@ -219,10 +172,14 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .btn-text{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,48px);font-weight:300;color:var(--white);letter-spacing:.02em;position:relative;transition:color .3s}
 .btn-text::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--white);transition:width .5s cubic-bezier(.16,1,.3,1)}
 .contact-btn:hover .btn-text::after{width:100%}
-.btn-circle{width:56px;height:56px;border-radius:50%;border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .4s,border-color .4s,transform .5s cubic-bezier(.16,1,.3,1)}
+ 
+/* PULSE CTA circle */
+.btn-circle{width:56px;height:56px;border-radius:50%;border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;transition:background .4s,border-color .4s,transform .5s cubic-bezier(.16,1,.3,1)}
+.btn-circle::after{content:'';position:absolute;inset:-1px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);animation:circlePulse 2.8s ease-in-out infinite}
 .btn-circle svg{width:20px;height:20px;color:var(--muted);transition:color .3s}
 .contact-btn:hover .btn-circle{background:var(--white);border-color:var(--white);transform:rotate(45deg)}
 .contact-btn:hover .btn-circle svg{color:var(--black)}
+.contact-btn:hover .btn-circle::after{animation:none;opacity:0}
 .contact-social{display:flex;gap:32px}
 .contact-social a{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);transition:color .3s}
 .contact-social a:hover{color:var(--white)}
@@ -268,11 +225,16 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
  
 /* KEYFRAMES */
-@keyframes fadeUp{to{opacity:1;transform:none}}
+@keyframes lineUp{to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{to{opacity:1}}
 @keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.25)}}
 @keyframes slideUpBanner{to{transform:translateY(0)}}
 @keyframes scaleIn{from{opacity:0;transform:scale(.96) translateY(12px)}to{opacity:1;transform:none}}
+@keyframes circlePulse{
+  0%{transform:scale(1);opacity:.5}
+  60%{transform:scale(1.55);opacity:0}
+  100%{transform:scale(1.55);opacity:0}
+}
  
 /* BROADCAST PRESENCE */
 .broadcast-wrap{max-width:1100px;margin:0 auto;padding:36px 0 0}
@@ -291,8 +253,6 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
 .broadcast-item a{display:contents}
 .broadcast-item a .broadcast-name{transition:color .3s}
 .broadcast-item a:hover .broadcast-name{color:var(--white)}
- 
-/* line draw on scroll */
 .broadcast-inner::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,0.09),transparent);transition:width 1.1s cubic-bezier(.16,1,.3,1)}
 .broadcast-inner.line-drawn::before{width:100%}
  
@@ -357,9 +317,9 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
   <div class="hero-bottom"></div>
   <div class="hero-content">
     <h1 class="hero-quote">
-      &ldquo;connected to the<br>
-      <em>frequencies that</em><br>
-      move me&rdquo;
+      <span class="hero-line"><span class="hero-line-inner">&ldquo;connected to the</span></span>
+      <span class="hero-line"><span class="hero-line-inner"><em>frequencies that</em></span></span>
+      <span class="hero-line"><span class="hero-line-inner">move me&rdquo;</span></span>
     </h1>
   </div>
   <div class="hero-scroll">
@@ -376,7 +336,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
     </div>
     <div class="about-body">
       <p class="reveal">
-        Lemos is a composer and Yamaha Artist whose work spans film, trailers, documentaries, advertising and immersive listening experiences. 
+        Lemos is a composer and Yamaha Artist whose work spans film, trailers, documentaries, advertising and immersive listening experiences.
       </p>
       <p class="reveal d1">
         He composed the score for Balas & Bolinhos 4, the most watched film in Portuguese cinemas in 2024. His work has since expanded to documentaries, international audiovisual productions and large-scale wellness catalogues.
@@ -469,8 +429,6 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
   </div>
 </section>
  
- 
- 
 <!-- DSP -->
 <section id="dsp">
   <div class="dsp-inner">
@@ -506,7 +464,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
     <div class="section-label">Industry Partners</div>
   </div>
   <div class="marquee-track">
-    <div class="marquee-inner">
+    <div class="marquee-inner" id="marqueeInner">
       <span class="m-item featured"><a href="https://pt.yamaha.com/pt/audio/music-audio-production/artists/z/ze-to-lemos.html" target="_blank" rel="noopener">Yamaha Artist</a></span>
       <span class="m-sep">&middot;</span>
       <span class="m-item">Universal Music / Decca</span>
@@ -683,6 +641,17 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
  
+/* ANIMATED DRAW LINES on scroll */
+const lineObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('line-drawn');
+      lineObs.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+document.querySelectorAll('.draw-line').forEach(el=>lineObs.observe(el));
+ 
 /* BROADCAST PRESENCE ANIMATION */
 const broadcastObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
@@ -695,6 +664,19 @@ const broadcastObs=new IntersectionObserver(entries=>{
 },{threshold:.4});
 const broadcastInner=document.querySelector('.broadcast-inner');
 if(broadcastInner)broadcastObs.observe(broadcastInner);
+ 
+/* MARQUEE — slow down on individual item hover */
+const marqueeInner=document.getElementById('marqueeInner');
+if(marqueeInner){
+  marqueeInner.querySelectorAll('.m-item').forEach(item=>{
+    item.addEventListener('mouseenter',()=>{
+      marqueeInner.style.animationDuration='60s';
+    });
+    item.addEventListener('mouseleave',()=>{
+      marqueeInner.style.animationDuration='28s';
+    });
+  });
+}
  
 /* ANIMATED COUNTER */
 function animateCounter(el,target,duration){
