@@ -116,8 +116,11 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .draw-line::after{content:'';position:absolute;top:0;left:0;width:0;height:1px;background:rgba(255,255,255,0.1);transition:width 1.2s cubic-bezier(.16,1,.3,1)}
 .draw-line.line-drawn::after{width:100%}
  
+/* BG WATERMARK — reusable large background text */
+.bg-watermark{position:absolute;top:0;right:0;font-family:'Cormorant Garamond',serif;font-size:130px;font-weight:300;color:rgba(255,255,255,0.025);pointer-events:none;line-height:1;white-space:nowrap;z-index:0;user-select:none}
+ 
 #film{background:var(--black);padding:120px 64px}
-.film-header{max-width:1100px;margin:0 auto 48px}
+.film-header{max-width:1100px;margin:0 auto 48px;position:relative;overflow:hidden;padding-top:8px}
 .about-cta{display:inline-flex;align-items:center;gap:12px;margin-top:24px;font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--white);border-bottom:1px solid var(--border);padding-bottom:8px;transition:border-color .3s,gap .3s}
 .about-cta:hover{border-color:var(--white);gap:20px}
 .about-cta::after{content:'→'}
@@ -140,8 +143,8 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .vid-label{padding:13px 16px;background:var(--dark);border-top:1px solid var(--border);font-family:'Geist Mono',monospace;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
  
 /* DSP */
-#dsp{background:var(--panel2);padding:120px 64px}
-.dsp-inner{max-width:1100px;margin:0 auto}
+#dsp{background:var(--panel2);padding:120px 64px;position:relative;overflow:hidden}
+.dsp-inner{max-width:1100px;margin:0 auto;position:relative}
 .dsp-body p{font-size:15px;line-height:1.88;color:var(--cream);margin-bottom:20px}
 .dsp-body strong{color:var(--white);font-weight:400}
 .platforms{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px}
@@ -163,8 +166,8 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
  
 /* CONTACT */
-#contact{background:var(--panel2);padding:140px 64px;border-top:1px solid var(--border)}
-.contact-inner{max-width:1100px;margin:0 auto}
+#contact{background:var(--panel2);padding:140px 64px;border-top:1px solid var(--border);position:relative;overflow:hidden}
+.contact-inner{max-width:1100px;margin:0 auto;position:relative}
 .contact-title{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,6vw,88px);font-weight:300;line-height:1.05;color:var(--white);margin:20px 0 28px}
 .contact-title em{font-style:italic;color:var(--cream)}
 .contact-sub{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:64px;max-width:420px}
@@ -255,7 +258,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
 .broadcast-item a:hover .broadcast-name{color:var(--white)}
 .broadcast-inner::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,0.09),transparent);transition:width 1.1s cubic-bezier(.16,1,.3,1)}
 .broadcast-inner.line-drawn::before{width:100%}
-
+ 
 /* INSTRUMENT DESIGN CARD */
 .instrument-card{max-width:1100px;margin:0 auto;border:1px solid var(--border);padding:56px;background:var(--panel);position:relative}
 .instrument-card-inner{display:grid;grid-template-columns:1fr 1.6fr;gap:64px;align-items:start}
@@ -268,6 +271,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
   #about{padding:80px 24px}#about::before{display:none}
   .about-grid{grid-template-columns:1fr;gap:48px}
   #film{padding:80px 24px}.film-header{margin-bottom:40px}
+  .bg-watermark{display:none}
   .section-divider{padding:36px 24px;gap:16px}
   .poster-grid{grid-template-columns:1fr 1fr;gap:2px}
   .video-section{padding:2px 0 0}.video-grid{grid-template-columns:1fr 1fr}
@@ -360,6 +364,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
 <!-- FILM & MEDIA -->
 <section id="film">
   <div class="film-header">
+    <div class="bg-watermark">Scoring</div>
     <div class="section-label reveal">Film &amp; Media</div>
     <h2 class="section-title reveal d1">Scoring <br></h2>
   </div>
@@ -413,6 +418,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
  
   <!-- Advertising -->
   <div class="film-header" style="margin-top:80px">
+    <div class="bg-watermark">Commercials</div>
     <div class="section-label reveal">Advertising</div>
     <h2 class="section-title reveal d1">Commercials<br></h2>
   </div>
@@ -438,6 +444,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
 <!-- DSP -->
 <section id="dsp">
   <div class="dsp-inner">
+    <div class="bg-watermark">Catalogue</div>
     <div class="section-label reveal">Streaming Catalogue</div>
     <div class="dsp-body">
       <h2 class="section-title reveal d1">Sleep. Meditation.<br>Solo piano.</h2>
@@ -463,49 +470,49 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
     </div>
   </div>
 </section>
-
+ 
    <!-- INSTRUMENT DESIGN -->
 <section id="instrument-design" style="background:var(--black);padding:120px 64px">
-
+ 
   <div class="instrument-card reveal">
-
+ 
     <div class="instrument-card-inner">
-
+ 
       <div>
         <div class="section-label" style="color:var(--accent2)">
           <span style="display:block;width:24px;height:1px;background:var(--accent2)"></span>
           Instrument Design
         </div>
       </div>
-
+ 
       <div class="dsp-body">
-
+ 
         <h2 class="section-title">
           The Felt Library.
         </h2>
-
+ 
         <p>
          Beyond composition, Lemos explores instrument design. <br>His first VST
           <em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--white)">The Felt Library</em>,
           was released through Pianobook.
         </p>
-
+ 
         <a href="https://www.pianobook.co.uk/packs/the-felt-library/"
            target="_blank"
            rel="noopener"
            class="about-cta">
            Explore on Pianobook
         </a>
-
+ 
       </div>
-
+ 
     </div>
-
+ 
   </div>
-
+ 
 </section>
   
-
+ 
    <!-- PARTNERS -->
 <section id="partners">
   <div class="partners-top reveal">
@@ -553,12 +560,13 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
   </div>
 </section>
   
-
-
+ 
+ 
  
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-inner">
+    <div class="bg-watermark">Get in touch</div>
     <div class="section-label">Contact</div>
     <h2 class="contact-title">Let&rsquo;s work<br><em>together.</em></h2>
     <p class="contact-sub">Available for film scoring, trailer music and sync licensing.</p>
@@ -577,7 +585,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
     </div>
   </div>
 </section>
-
+ 
  
  
 <!-- FOOTER -->
