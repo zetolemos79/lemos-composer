@@ -8,18 +8,22 @@
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Geist+Mono:wght@300;400&family=Outfit:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Geist+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 a{color:inherit;text-decoration:none}
  
 :root{
   --black:#050505;
+  --black-soft:#0a0a0a;
   --white:#ece7dc;
   --cream:#cfc9bd;
   --muted:#65625a;
+  --muted-dim:#403e39;
   --gold:#c9a876;
+  --gold-dim:#8a7654;
   --border:rgba(255,255,255,0.07);
+  --border-soft:rgba(255,255,255,0.04);
 }
  
 html,body{height:100%}
@@ -32,7 +36,7 @@ body{
   flex-direction:column;
   align-items:center;
   min-height:100vh;
-  padding:64px 24px 48px;
+  padding:64px 24px 56px;
 }
  
 /* fade-in only — no scroll animation, no motion beyond entrance */
@@ -52,6 +56,13 @@ body{
   width:min(90vw,480px);
   aspect-ratio:1/1;
   flex-shrink:0;
+  border-radius:2px;
+  overflow:hidden;
+  box-shadow:0 50px 100px -30px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.04);
+  transition:box-shadow .6s ease;
+}
+.artwork-wrap.is-playing{
+  box-shadow:0 50px 110px -28px rgba(0,0,0,0.9), 0 0 60px -10px rgba(201,168,118,0.14), 0 0 0 1px rgba(201,168,118,0.12);
 }
 .artwork{
   width:100%;
@@ -59,40 +70,98 @@ body{
   object-fit:cover;
   display:block;
   filter:saturate(.9) brightness(.82) contrast(1.05);
-  box-shadow:0 40px 90px -30px rgba(0,0,0,0.8);
+  transform:scale(1.001);
+  transition:filter 1s ease, transform 8s ease;
+}
+.artwork-wrap.is-playing .artwork{
+  filter:saturate(.98) brightness(.86) contrast(1.05);
+  transform:scale(1.035);
+}
+ 
+.artwork-wrap::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(5,5,5,0) 55%, rgba(5,5,5,0.55) 100%);
+  pointer-events:none;
 }
  
 .play-btn{
   position:absolute;
   inset:0;
   margin:auto;
-  width:64px;
-  height:64px;
+  width:60px;
+  height:60px;
   border-radius:50%;
-  border:1px solid rgba(240,236,228,0.55);
-  background:rgba(5,5,5,0.35);
-  backdrop-filter:blur(6px);
+  border:1px solid rgba(240,236,228,0.5);
+  background:rgba(5,5,5,0.3);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
   display:flex;
   align-items:center;
   justify-content:center;
   cursor:pointer;
-  transition:border-color .4s, background .4s, transform .4s;
+  z-index:2;
+  transition:border-color .4s, background .4s, transform .25s ease;
 }
-.play-btn:hover{border-color:var(--white);background:rgba(5,5,5,0.55)}
-.play-btn svg{width:20px;height:20px;color:var(--white)}
+.play-btn:hover{border-color:var(--white);background:rgba(5,5,5,0.5);transform:scale(1.06)}
+.play-btn:active{transform:scale(.96)}
+.play-btn svg{width:18px;height:18px;color:var(--white)}
+.play-btn .icon-play{margin-left:2px}
 .play-btn .icon-pause{display:none}
 .play-btn.playing .icon-play{display:none}
 .play-btn.playing .icon-pause{display:block}
-.play-btn.playing{animation:breathe 3.2s ease-in-out infinite}
+.play-btn.playing{
+  width:52px;height:52px;
+  border-color:rgba(201,168,118,0.5);
+  animation:breathe 3.4s ease-in-out infinite;
+}
 @keyframes breathe{
   0%,100%{box-shadow:0 0 0 0 rgba(201,168,118,0.0)}
-  50%{box-shadow:0 0 0 14px rgba(201,168,118,0.05)}
+  50%{box-shadow:0 0 0 16px rgba(201,168,118,0.045)}
 }
+ 
+.loading-ring{
+  position:absolute;
+  inset:0;margin:auto;
+  width:60px;height:60px;
+  border-radius:50%;
+  border:1px solid transparent;
+  border-top-color:rgba(201,168,118,0.75);
+  z-index:3;
+  display:none;
+  animation:spin .9s linear infinite;
+}
+.play-btn.loading + .loading-ring{display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+ 
+/* TRANSPORT (prev / play / next) */
+.transport{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:28px;
+  margin-top:28px;
+}
+.transport-btn{
+  background:none;
+  border:none;
+  color:var(--muted);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px;
+  transition:color .3s, transform .2s;
+}
+.transport-btn svg{width:15px;height:15px}
+.transport-btn:hover{color:var(--white)}
+.transport-btn:active{transform:scale(.9)}
  
 /* PLAYER META / PROGRESS */
 .player{
   width:min(90vw,480px);
-  margin-top:52px;
+  margin-top:22px;
 }
 .player-meta{
   display:flex;
@@ -104,47 +173,75 @@ body{
   display:flex;
   align-items:baseline;
   gap:10px;
+  min-width:0;
 }
 .track-name .tn-idx{
   font-family:'Geist Mono',monospace;
   font-size:9px;
   letter-spacing:.1em;
   color:var(--gold);
+  flex-shrink:0;
 }
 .track-name .tn-title{
   font-family:'Cormorant Garamond',serif;
   font-style:italic;
-  font-size:18px;
+  font-size:19px;
   color:var(--cream);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 .track-time{
   font-size:9px;
   letter-spacing:.1em;
   color:var(--muted);
+  flex-shrink:0;
+  padding-left:12px;
 }
-.seek{
-  -webkit-appearance:none;
-  appearance:none;
-  width:100%;
-  height:1px;
-  background:var(--border);
-  margin-top:16px;
+ 
+.seek-wrap{
+  position:relative;
+  margin-top:18px;
+  padding:8px 0;
   cursor:pointer;
-  outline:none;
 }
-.seek::-webkit-slider-thumb{
-  -webkit-appearance:none;
-  width:7px;height:7px;border-radius:50%;
+.seek-track{
+  position:relative;
+  height:2px;
+  border-radius:2px;
+  background:var(--border);
+  overflow:hidden;
+}
+.seek-fill{
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:0%;
+  background:var(--gold-dim);
+  border-radius:2px;
+  transition:background .3s;
+}
+.seek-wrap:hover .seek-fill{background:var(--gold)}
+.seek-thumb{
+  position:absolute;
+  top:50%;
+  left:0%;
+  width:8px;height:8px;
+  border-radius:50%;
   background:var(--gold);
-  box-shadow:0 0 0 8px rgba(0,0,0,0);
-  transition:box-shadow .2s;
+  transform:translate(-50%,-50%) scale(0);
+  transition:transform .2s ease;
+  pointer-events:none;
 }
-.seek:hover::-webkit-slider-thumb{box-shadow:0 0 0 4px rgba(201,168,118,0.12)}
-.seek::-moz-range-thumb{
-  width:7px;height:7px;border-radius:50%;border:none;
-  background:var(--gold);
+.seek-wrap:hover .seek-thumb{transform:translate(-50%,-50%) scale(1)}
+.seek-input{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  opacity:0;
+  cursor:pointer;
+  margin:0;
 }
-.seek::-moz-range-track{height:1px;background:var(--border)}
  
 /* PLAYLIST */
 .note{
@@ -155,7 +252,7 @@ body{
   letter-spacing:.14em;
   text-transform:uppercase;
   color:var(--muted);
-  margin-top:20px;
+  margin-top:26px;
 }
  
 .intro{
@@ -174,18 +271,28 @@ body{
   border-top:1px solid var(--border);
 }
 .playlist li{
+  position:relative;
   display:flex;
   align-items:center;
   gap:14px;
-  padding:15px 2px;
+  padding:15px 4px 15px 14px;
   border-bottom:1px solid var(--border);
   font-size:14px;
   color:var(--muted);
   letter-spacing:.02em;
   cursor:pointer;
-  transition:color .3s;
+  transition:color .3s, padding-left .3s;
 }
-.playlist li:hover{color:var(--cream)}
+.playlist li::before{
+  content:'';
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:2px;
+  background:var(--gold);
+  transform:scaleY(0);
+  transition:transform .3s ease;
+}
+.playlist li:hover{color:var(--cream);padding-left:18px}
 .playlist li .idx{
   font-family:'Geist Mono',monospace;
   font-size:9px;
@@ -193,54 +300,155 @@ body{
   width:16px;
   flex-shrink:0;
 }
-.playlist li.active{color:var(--white)}
+.playlist li .title{flex:1;min-width:0}
+.playlist li .dur{
+  font-family:'Geist Mono',monospace;
+  font-size:9px;
+  color:var(--muted-dim);
+  flex-shrink:0;
+  letter-spacing:.05em;
+}
+.playlist li.active{color:var(--white);padding-left:18px}
+.playlist li.active::before{transform:scaleY(1)}
 .playlist li.active .idx{color:var(--gold)}
-.playlist li.active::after{
-  content:'';
-  width:5px;height:5px;border-radius:50%;
-  background:var(--gold);
-  margin-left:auto;
+.playlist li.active .dur{color:var(--gold-dim)}
+.eq{
+  display:none;
+  align-items:flex-end;
+  gap:2px;
+  width:16px;
+  height:11px;
   flex-shrink:0;
 }
+.playlist li.playing .eq{display:flex}
+.playlist li.playing .idx{display:none}
+.eq span{
+  width:2px;
+  background:var(--gold);
+  border-radius:1px;
+  animation:eq 1s ease-in-out infinite;
+}
+.eq span:nth-child(1){animation-delay:-.6s}
+.eq span:nth-child(2){animation-delay:-.2s}
+.eq span:nth-child(3){animation-delay:-.9s}
+@keyframes eq{
+  0%,100%{height:3px}
+  50%{height:11px}
+}
  
-/* CONTACT */
+/* CONTACT — closing signature block */
 .contact{
-  margin-top:88px;
+  width:min(90vw,480px);
+  margin-top:96px;
+  padding-top:48px;
+  position:relative;
   text-align:center;
   display:flex;
   flex-direction:column;
-  gap:10px;
+  align-items:center;
 }
-.contact .name{
-  font-family:'Cormorant Garamond',serif;
-  font-size:14px;
-  letter-spacing:.32em;
+.contact::before{
+  content:'';
+  position:absolute;
+  top:0;left:50%;
+  transform:translateX(-50%);
+  width:32px;
+  height:1px;
+  background:var(--gold-dim);
+}
+.contact .eyebrow{
+  font-family:'Geist Mono',monospace;
+  font-size:9px;
+  letter-spacing:.28em;
   text-transform:uppercase;
-  color:var(--cream);
-  margin-bottom:6px;
+  color:var(--muted);
+  margin-bottom:18px;
 }
-.contact a{
+.contact .links{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+}
+.contact .site-link{
+  position:relative;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:17px;
+  letter-spacing:.06em;
+  color:var(--cream);
+  padding:14px 8px 10px;
+  overflow:hidden;
+}
+.contact .site-link::before{
+  content:'';
+  position:absolute;
+  left:50%;
+  bottom:0;
+  width:0%;
+  height:1px;
+  background:var(--gold);
+  transform:translateX(-50%);
+  transition:width .5s cubic-bezier(.4,0,.2,1);
+}
+.contact .site-link::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  bottom:0;
+  width:22px;
+  height:1px;
+  background:var(--muted-dim);
+  transform:translateX(-50%);
+}
+.contact .site-link:hover{color:var(--white)}
+.contact .site-link:hover::before{width:100%}
+.contact .mail-link{
   font-family:'Geist Mono',monospace;
   font-size:10px;
-  letter-spacing:.15em;
+  letter-spacing:.14em;
   color:var(--muted);
-  transition:color .3s;
+  padding-bottom:2px;
+  border-bottom:1px solid transparent;
+  transition:color .3s, border-color .3s;
 }
-.contact a:hover{color:var(--white)}
+.contact .mail-link:hover{
+  color:var(--cream);
+  border-color:var(--muted);
+}
+.contact .rights{
+  margin-top:44px;
+  font-family:'Geist Mono',monospace;
+  font-size:8px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--muted-dim);
+}
  
 @media(max-width:480px){
-  body{padding:48px 20px 40px}
-  .contact{margin-top:64px}
+  body{padding:48px 20px 44px}
+  .contact{margin-top:72px}
+  .contact .name{font-size:28px}
 }
 </style>
 </head>
 <body>
  
-<div class="artwork-wrap fade f1">
+<div class="artwork-wrap fade f1" id="artworkWrap">
   <img class="artwork" id="artwork" src="/trailer/trailer-artwork.jpg" alt="Origin Unknown — A Hybrid Trailer Music World, music by Lemos">
   <button class="play-btn" id="playBtn" aria-label="Play">
     <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
     <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+  </button>
+  <div class="loading-ring"></div>
+</div>
+ 
+<div class="transport fade f2">
+  <button class="transport-btn" id="prevBtn" aria-label="Previous track">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+  </button>
+  <button class="transport-btn" id="nextBtn" aria-label="Next track">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM6 6l8.5 6L6 18z"/></svg>
   </button>
 </div>
  
@@ -249,7 +457,14 @@ body{
     <span class="track-name" id="trackName"><span class="tn-idx" id="trackIdx">01</span><span class="tn-title" id="trackTitle">Extraction</span></span>
     <span class="track-time"><span id="curTime">0:00</span> / <span id="durTime">0:00</span></span>
   </div>
-  <input type="range" class="seek" id="seek" value="0" min="0" max="100" step="0.1">
+ 
+  <div class="seek-wrap" id="seekWrap">
+    <div class="seek-track">
+      <div class="seek-fill" id="seekFill"></div>
+    </div>
+    <div class="seek-thumb" id="seekThumb"></div>
+    <input type="range" class="seek-input" id="seek" value="0" min="0" max="100" step="0.1">
+  </div>
 </div>
  
 <p class="note fade f4">Underscore and percussion-only versions <br>available for all cues</p>
@@ -257,28 +472,70 @@ body{
 <p class="intro fade f5">Original hybrid trailer music by Lemos <br> created for film, television and game campaigns. <br>Available for worldwide licensing.</p>
  
 <ul class="playlist fade f6" id="playlist">
-  <li class="active" data-src="/trailer/Extraction.mp3" data-title="Extraction"><span class="idx">01</span>Extraction</li>
-  <li data-src="/trailer/Jungle Rite.mp3" data-title="Jungle Rite"><span class="idx">02</span>Jungle Rite</li>
-  <li data-src="/trailer/Black Protocol.mp3" data-title="Black Protocol"><span class="idx">03</span>Black Protocol</li>
-  <li data-src="/trailer/Ancient.mp3" data-title="Ancient"><span class="idx">04</span>Ancient</li>
-  <li data-src="/trailer/The Ritual Tribe.mp3" data-title="The Ritual Tribe"><span class="idx">05</span>The Ritual Tribe</li>
-  <li data-src="/trailer/The Unknown Tribe.mp3" data-title="The Unknown Tribe"><span class="idx">06</span>The Unknown Tribe</li>
-  <li data-src="/trailer/Hunter Mechanism.mp3" data-title="Hunter Mechanism"><span class="idx">07</span>Hunter Mechanism</li>
+  <li class="active playing" data-src="/trailer/Extraction.mp3" data-title="Extraction">
+    <span class="idx">01</span>
+    <span class="eq"><span></span><span></span><span></span></span>
+    <span class="title">Extraction</span>
+    <span class="dur" data-idx="0"></span>
+  </li>
+  <li data-src="/trailer/Jungle Rite.mp3" data-title="Jungle Rite">
+    <span class="idx">02</span>
+    <span class="eq"><span></span><span></span><span></span></span>
+    <span class="title">Jungle Rite</span>
+    <span class="dur" data-idx="1"></span>
+  </li>
+  <li data-src="/trailer/Black Protocol.mp3" data-title="Black Protocol">
+    <span class="idx">03</span>
+    <span class="eq"><span></span><span></span><span></span></span>
+    <span class="title">Black Protocol</span>
+    <span class="dur" data-idx="2"></span>
+  </li>
+  <li data-src="/trailer/Ancient.mp3" data-title="Ancient">
+    <span class="idx">04</span>
+    <span class="eq"><span></span><span></span><span></span></span>
+    <span class="title">Ancient</span>
+    <span class="dur" data-idx="3"></span>
+  </li>
+  <li data-src="/trailer/The Ritual Tribe.mp3" data-title="The Ritual Tribe">
+    <span class="idx">05</span>
+    <span class="eq"><span></span><span></span><span></span></span>
+    <span class="title">The Ritual Tribe</span>
+    <span class="dur" data-idx="4"></span>
+  </li>
+  <li data-src="/trailer/The Unknown Tribe.mp3" data-title="The Unknown Tribe">
+    <span class="idx">06</span>
+    <span class="eq"><span></span><span></span><span></span></span>
+    <span class="title">The Unknown Tribe</span>
+    <span class="dur" data-idx="5"></span>
+  </li>
+  <li data-src="/trailer/Hunter Mechanism.mp3" data-title="Hunter Mechanism">
+    <span class="idx">07</span>
+    <span class="eq"><span></span><span></span><span></span></span>
+    <span class="title">Hunter Mechanism</span>
+    <span class="dur" data-idx="6"></span>
+  </li>
 </ul>
  
 <div class="contact fade f7">
-  <div class="name">Lemos</div>
-  <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#101;&#109;&#111;&#115;&#99;&#111;&#109;&#112;&#111;&#115;&#101;&#114;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">Contact</a>
-  <a href="https://www.lemoscomposer.com" target="_blank" rel="noopener">WWW.LEMOSCOMPOSER.COM</a>
-  
+  <div class="eyebrow">Licensing &amp; Inquiries</div>
+  <div class="links">
+    <a class="site-link" href="https://www.lemoscomposer.com" target="_blank" rel="noopener">www.lemoscomposer.com</a>
+    <a class="mail-link" href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#101;&#109;&#111;&#115;&#99;&#111;&#109;&#112;&#111;&#115;&#101;&#114;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">Contact by Email</a>
+  </div>
+  <div class="rights">Origin Unknown &mdash; Hybrid Trailer Music World</div>
 </div>
  
 <audio id="audio" preload="metadata"></audio>
  
 <script>
 const audio=document.getElementById('audio');
+const artworkWrap=document.getElementById('artworkWrap');
 const playBtn=document.getElementById('playBtn');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
 const seek=document.getElementById('seek');
+const seekFill=document.getElementById('seekFill');
+const seekThumb=document.getElementById('seekThumb');
 const curTime=document.getElementById('curTime');
 const durTime=document.getElementById('durTime');
 const trackIdx=document.getElementById('trackIdx');
@@ -292,17 +549,24 @@ function fmt(s){
 }
  
 function loadTrack(li,autoplay){
-  items.forEach(i=>i.classList.remove('active'));
+  items.forEach(i=>i.classList.remove('active','playing'));
   li.classList.add('active');
   trackIdx.textContent=li.querySelector('.idx').textContent;
   trackTitle.textContent=li.dataset.title;
   audio.src=li.dataset.src;
   seek.value=0;
+  seekFill.style.width='0%';
+  seekThumb.style.left='0%';
   curTime.textContent='0:00';
   durTime.textContent='0:00';
   if(autoplay){
-    audio.play().catch(()=>{});
+    playBtn.classList.add('loading');
+    audio.play().catch(()=>{}).finally(()=>playBtn.classList.remove('loading'));
   }
+}
+ 
+function currentIndex(){
+  return items.findIndex(i=>i.classList.contains('active'));
 }
  
 items.forEach(li=>li.addEventListener('click',()=>loadTrack(li,true)));
@@ -310,28 +574,67 @@ items.forEach(li=>li.addEventListener('click',()=>loadTrack(li,true)));
 playBtn.addEventListener('click',()=>{
   if(audio.paused){
     if(!audio.src)loadTrack(items[0],false);
-    audio.play().catch(()=>{});
+    playBtn.classList.add('loading');
+    audio.play().catch(()=>{}).finally(()=>playBtn.classList.remove('loading'));
   } else {
     audio.pause();
   }
 });
  
-audio.addEventListener('play',()=>playBtn.classList.add('playing'));
-audio.addEventListener('pause',()=>playBtn.classList.remove('playing'));
+prevBtn.addEventListener('click',()=>{
+  const idx=currentIndex();
+  const prev=items[(idx-1+items.length)%items.length];
+  loadTrack(prev,true);
+});
+nextBtn.addEventListener('click',()=>{
+  const idx=currentIndex();
+  const next=items[(idx+1)%items.length];
+  loadTrack(next,true);
+});
+ 
+audio.addEventListener('play',()=>{
+  playBtn.classList.add('playing');
+  artworkWrap.classList.add('is-playing');
+  const active=items[currentIndex()];
+  if(active)active.classList.add('playing');
+});
+audio.addEventListener('pause',()=>{
+  playBtn.classList.remove('playing');
+  artworkWrap.classList.remove('is-playing');
+  items.forEach(i=>i.classList.remove('playing'));
+});
 audio.addEventListener('loadedmetadata',()=>{durTime.textContent=fmt(audio.duration)});
 audio.addEventListener('timeupdate',()=>{
   if(audio.duration){
-    seek.value=(audio.currentTime/audio.duration)*100;
+    const pct=(audio.currentTime/audio.duration)*100;
+    seek.value=pct;
+    seekFill.style.width=pct+'%';
+    seekThumb.style.left=pct+'%';
     curTime.textContent=fmt(audio.currentTime);
   }
 });
 audio.addEventListener('ended',()=>{
-  const idx=items.findIndex(i=>i.classList.contains('active'));
+  const idx=currentIndex();
   const next=items[(idx+1)%items.length];
   loadTrack(next,true);
 });
 seek.addEventListener('input',()=>{
+  seekFill.style.width=seek.value+'%';
+  seekThumb.style.left=seek.value+'%';
   if(audio.duration)audio.currentTime=(seek.value/100)*audio.duration;
+});
+ 
+audio.volume=0.8;
+ 
+/* preload durations for the playlist without playing */
+items.forEach(li=>{
+  const durEl=li.querySelector('.dur');
+  const probe=new Audio();
+  probe.preload='metadata';
+  probe.src=li.dataset.src;
+  probe.addEventListener('loadedmetadata',()=>{
+    if(durEl)durEl.textContent=fmt(probe.duration);
+  });
 });
  
 /* preload first track reference (not playing) so metadata/title are ready */
