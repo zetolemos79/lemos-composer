@@ -32,7 +32,7 @@ body{
   flex-direction:column;
   align-items:center;
   min-height:100vh;
-  padding:9vh 24px 48px;
+  padding:64px 24px 48px;
 }
  
 /* fade-in only — no scroll animation, no motion beyond entrance */
@@ -49,7 +49,7 @@ body{
 /* ARTWORK + PLAYER HERO */
 .artwork-wrap{
   position:relative;
-  width:min(56vh,480px);
+  width:min(90vw,480px);
   aspect-ratio:1/1;
   flex-shrink:0;
 }
@@ -91,7 +91,7 @@ body{
  
 /* PLAYER META / PROGRESS */
 .player{
-  width:min(56vh,480px);
+  width:min(90vw,480px);
   margin-top:52px;
 }
 .player-meta{
@@ -101,6 +101,17 @@ body{
   font-family:'Geist Mono',monospace;
 }
 .track-name{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+}
+.track-name .tn-idx{
+  font-family:'Geist Mono',monospace;
+  font-size:9px;
+  letter-spacing:.1em;
+  color:var(--gold);
+}
+.track-name .tn-title{
   font-family:'Cormorant Garamond',serif;
   font-style:italic;
   font-size:18px;
@@ -137,7 +148,7 @@ body{
  
 /* PLAYLIST */
 .note{
-  width:min(56vh,480px);
+  width:min(90vw,480px);
   text-align:center;
   font-family:'Geist Mono',monospace;
   font-size:9px;
@@ -148,7 +159,7 @@ body{
 }
  
 .intro{
-  width:min(56vh,480px);
+  width:min(90vw,480px);
   text-align:center;
   font-size:13px;
   line-height:1.8;
@@ -158,7 +169,7 @@ body{
  
 .playlist{
   list-style:none;
-  width:min(56vh,480px);
+  width:min(90vw,480px);
   margin-top:0;
   border-top:1px solid var(--border);
 }
@@ -218,20 +229,15 @@ body{
 .contact a:hover{color:var(--white)}
  
 @media(max-width:480px){
-  body{padding:8vh 20px 40px}
-  .artwork-wrap,.player,.playlist{width:100%;max-width:380px}
+  body{padding:48px 20px 40px}
+  .contact{margin-top:64px}
 }
 </style>
 </head>
 <body>
  
 <div class="artwork-wrap fade f1">
-<img
-  class="artwork"
-  id="artwork"
-  src="/trailer/trailer-artwork.jpg"
-  alt="Origin Unknown — A Hybrid Trailer Music World, music by Lemos"
->
+  <img class="artwork" id="artwork" src="/trailer/trailer-artwork.jpg" alt="Origin Unknown — A Hybrid Trailer Music World, music by Lemos">
   <button class="play-btn" id="playBtn" aria-label="Play">
     <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
     <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
@@ -240,7 +246,7 @@ body{
  
 <div class="player fade f3">
   <div class="player-meta">
-    <span class="track-name" id="trackName">Extraction</span>
+    <span class="track-name" id="trackName"><span class="tn-idx" id="trackIdx">01</span><span class="tn-title" id="trackTitle">Extraction</span></span>
     <span class="track-time"><span id="curTime">0:00</span> / <span id="durTime">0:00</span></span>
   </div>
   <input type="range" class="seek" id="seek" value="0" min="0" max="100" step="0.1">
@@ -251,13 +257,13 @@ body{
 <p class="intro fade f5">A curated collection of original hybrid trailer music by Lemos, created for film, television and game campaigns. Available for worldwide licensing.</p>
  
 <ul class="playlist fade f6" id="playlist">
-  <li class="active" data-src="Extraction.mp3"><span class="idx">01</span>Extraction</li>
-  <li data-src="Jungle Rite.mp3"><span class="idx">02</span>Jungle Rite</li>
-  <li data-src="Black Protocol.mp3"><span class="idx">03</span>Black Protocol</li>
-  <li data-src="Ancient.mp3"><span class="idx">04</span>Ancient</li>
-  <li data-src="The Ritual Tribe.mp3"><span class="idx">05</span>The Ritual Tribe</li>
-  <li data-src="The Unknown Tribe.mp3"><span class="idx">06</span>The Unknown Tribe</li>
-  <li data-src="Hunter Mechanism.mp3"><span class="idx">07</span>Hunter Mechanism</li>
+  <li class="active" data-src="/trailer/Extraction.mp3" data-title="Extraction"><span class="idx">01</span>Extraction</li>
+  <li data-src="/trailer/Jungle Rite.mp3" data-title="Jungle Rite"><span class="idx">02</span>Jungle Rite</li>
+  <li data-src="/trailer/Black Protocol.mp3" data-title="Black Protocol"><span class="idx">03</span>Black Protocol</li>
+  <li data-src="/trailer/Ancient.mp3" data-title="Ancient"><span class="idx">04</span>Ancient</li>
+  <li data-src="/trailer/The Ritual Tribe.mp3" data-title="The Ritual Tribe"><span class="idx">05</span>The Ritual Tribe</li>
+  <li data-src="/trailer/The Unknown Tribe.mp3" data-title="The Unknown Tribe"><span class="idx">06</span>The Unknown Tribe</li>
+  <li data-src="/trailer/Hunter Mechanism.mp3" data-title="Hunter Mechanism"><span class="idx">07</span>Hunter Mechanism</li>
 </ul>
  
 <div class="contact fade f7">
@@ -275,7 +281,8 @@ const playBtn=document.getElementById('playBtn');
 const seek=document.getElementById('seek');
 const curTime=document.getElementById('curTime');
 const durTime=document.getElementById('durTime');
-const trackName=document.getElementById('trackName');
+const trackIdx=document.getElementById('trackIdx');
+const trackTitle=document.getElementById('trackTitle');
 const items=[...document.querySelectorAll('.playlist li')];
  
 function fmt(s){
@@ -287,7 +294,8 @@ function fmt(s){
 function loadTrack(li,autoplay){
   items.forEach(i=>i.classList.remove('active'));
   li.classList.add('active');
-  trackName.textContent=li.textContent.trim();
+  trackIdx.textContent=li.querySelector('.idx').textContent;
+  trackTitle.textContent=li.dataset.title;
   audio.src=li.dataset.src;
   seek.value=0;
   curTime.textContent='0:00';
@@ -331,4 +339,3 @@ loadTrack(items[0],false);
 </script>
 </body>
 </html>
- 
