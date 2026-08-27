@@ -94,13 +94,15 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .dsp-counter{margin:32px 0 28px;padding:28px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .dsp-counter-row{display:flex;align-items:baseline;gap:6px}
  
-/* IMDb CTA */
-.imdb-wrap{max-width:1100px;margin:48px auto 0;border:1px solid var(--border);padding:48px 48px 44px;background:var(--panel);position:relative}
+/* CONNECT & EXPLORE */
+#connect{background:var(--panel);padding:120px 64px;position:relative;overflow:hidden}
+.connect-inner{max-width:1100px;margin:0 auto;position:relative}
+.connect-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px}
+.connect-card{border:1px solid var(--border);padding:44px 40px;display:flex;flex-direction:column;align-items:flex-start;gap:22px;background:rgba(255,255,255,0.01)}
 .imdb-eyebrow{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-bottom:28px}
-.imdb-cta-inner{display:flex;align-items:flex-end;justify-content:space-between;gap:32px}
-.imdb-cta-left{display:flex;flex-direction:column;gap:20px}
 .imdb-badge{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.15em;background:#f5c518;color:#000;padding:5px 10px;display:inline-block;width:fit-content}
-.imdb-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,42px);font-weight:300;color:var(--cream);line-height:1.15;margin:0}
+.imdb-badge.yamaha{background:var(--accent2);color:#000}
+.imdb-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,2.6vw,30px);font-weight:300;color:var(--cream);line-height:1.3;margin:0}
 .imdb-cta-btn{display:inline-flex;align-items:center;gap:14px;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cream);border:1px solid var(--border);padding:16px 28px;white-space:nowrap;transition:background .3s,color .3s,border-color .3s;flex-shrink:0}
 .imdb-cta-btn svg{width:16px;height:16px;transition:transform .4s cubic-bezier(.16,1,.3,1)}
 .imdb-cta-btn:hover{background:var(--cream);color:#000;border-color:var(--cream)}
@@ -124,7 +126,7 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .about-cta{display:inline-flex;align-items:center;gap:12px;margin-top:24px;font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--white);border-bottom:1px solid var(--border);padding-bottom:8px;transition:border-color .3s,gap .3s}
 .about-cta:hover{border-color:var(--white);gap:20px}
 .about-cta::after{content:'→'}
-.poster-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;max-width:1100px;margin:0 auto}
+.poster-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;max-width:1100px;margin:0 auto}
 .film-item{position:relative;overflow:hidden}
 .film-item img{width:100%;display:block;aspect-ratio:2/3;object-fit:cover;filter:saturate(.8) brightness(.88);transition:transform .65s cubic-bezier(.16,1,.3,1),filter .4s}
 .film-item:hover img{transform:scale(1.04);filter:saturate(1) brightness(.95)}
@@ -260,7 +262,7 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
 .broadcast-inner.line-drawn::before{width:100%}
  
 /* INSTRUMENT DESIGN CARD */
-.instrument-card{max-width:1100px;margin:0 auto;border:1px solid var(--border);padding:56px;background:var(--panel);position:relative}
+.instrument-card{max-width:1100px;margin:0 auto;border:1px solid var(--border);padding:56px;background:var(--panel2);position:relative}
 .instrument-card-inner{display:grid;grid-template-columns:1fr 1.6fr;gap:64px;align-items:start}
  
 /* RESPONSIVE */
@@ -270,6 +272,8 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
   #hero{height:100svh}.hero-content{padding:0 24px 64px}.hero-scroll{right:24px}
   #about{padding:80px 24px}#about::before{display:none}
   .about-grid{grid-template-columns:1fr;gap:48px}
+  #connect{padding:80px 24px}
+  .connect-grid{grid-template-columns:1fr;gap:20px}
   #film{padding:80px 24px}.film-header{margin-bottom:40px}
   .bg-watermark{display:none}
   .section-divider{padding:36px 24px;gap:16px}
@@ -347,9 +351,9 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
     <div class="about-body">
       <p class="reveal">
         Lemos is a Portuguese composer known for blending modern electronics with expressive orchestration across film, trailers, documentaries and ambient music.
-
+ 
 His scoring credits include the feature film Balas & Bolinhos 4 and 1506 — The Lisbon Genocide and 2000 Kidnapped Jewish Children. His work also includes original music for campaigns and projects for FC Porto and Turismo de Portugal, alongside film, television and advertising.
-
+ 
 Beyond scoring, Lemos has created an extensive catalogue of ambient piano, generating more than 150 million streams across major digital platforms worldwide.
       </p>
     
@@ -401,23 +405,6 @@ Beyond scoring, Lemos has created an extensive catalogue of ambient piano, gener
     </div>
   </div>
  
-  <!-- IMDb CTA -->
-  <div class="imdb-wrap reveal">
-    <div class="imdb-eyebrow">Scoring Credits</div>
-    <div class="imdb-cta-inner">
-      <div class="imdb-cta-left">
-        <span class="imdb-badge">IMDb</span>
-        <p class="imdb-headline"><br></p>
-      </div>
-      <a href="https://www.imdb.com/name/nm15962386/" target="_blank" rel="noopener" class="imdb-cta-btn">
-        View Credits
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-          <path d="M5 12h14M13 6l6 6-6 6"/>
-        </svg>
-      </a>
-    </div>
-  </div>
- 
   <!-- Advertising -->
   <div class="film-header" style="margin-top:80px">
     <div class="bg-watermark">Commercials</div>
@@ -438,6 +425,36 @@ Beyond scoring, Lemos has created an extensive catalogue of ambient piano, gener
           <iframe src="https://www.youtube.com/embed/fQDsRQYAYO0" title="O Regresso a Casa FC Porto" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="vid-label">O Regresso a Casa &mdash; FC Porto</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CONNECT & EXPLORE -->
+<section id="connect">
+  <div class="connect-inner">
+    <div class="bg-watermark">Explore</div>
+    <div class="section-label reveal">Connect &amp; Explore</div>
+    <div class="connect-grid">
+      <div class="connect-card reveal">
+        <span class="imdb-badge">IMDb</span>
+        <p class="imdb-headline">Film, television and scoring credits.</p>
+        <a href="https://www.imdb.com/name/nm15962386/" target="_blank" rel="noopener" class="imdb-cta-btn">
+          View Profile
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </a>
+      </div>
+      <div class="connect-card reveal d1">
+        <span class="imdb-badge yamaha">Yamaha</span>
+        <p class="imdb-headline">Official Yamaha Artist.</p>
+        <a href="https://pt.yamaha.com/pt/audio/music-audio-production/artists/z/ze-to-lemos.html" target="_blank" rel="noopener" class="imdb-cta-btn">
+          Learn More
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </a>
       </div>
     </div>
   </div>
@@ -474,7 +491,7 @@ Beyond scoring, Lemos has created an extensive catalogue of ambient piano, gener
 </section>
  
    <!-- INSTRUMENT DESIGN -->
-<section id="instrument-design" style="background:var(--black);padding:120px 64px">
+<section id="instrument-design" style="background:var(--panel);padding:120px 64px">
  
   <div class="instrument-card reveal">
  
