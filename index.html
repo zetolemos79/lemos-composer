@@ -94,19 +94,67 @@ nav.scrolled{padding:18px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(
 .dsp-counter{margin:32px 0 28px;padding:28px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .dsp-counter-row{display:flex;align-items:baseline;gap:6px}
  
-/* CONNECT & EXPLORE */
-#connect{background:var(--panel);padding:64px 64px 80px;position:relative;overflow:hidden}
+/* ===== CONNECT & EXPLORE ===== */
+#connect{background:var(--panel);padding:80px 64px;position:relative;overflow:hidden}
 .connect-inner{max-width:1100px;margin:0 auto;position:relative}
-.connect-row{display:flex;align-items:stretch;margin-top:32px;border-top:1px solid var(--border)}
-.connect-link{flex:1;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:32px 8px;transition:background .35s}
-.connect-link + .connect-link{border-left:1px solid var(--border)}
-.connect-link:hover{background:rgba(255,255,255,0.02)}
-.connect-link-left{display:flex;align-items:center;gap:18px}
-.connect-tag{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:6px 12px;flex-shrink:0;transition:border-color .3s,color .3s}
-.connect-link:hover .connect-tag{border-color:var(--accent2);color:var(--accent2)}
-.connect-link-text{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,1.8vw,22px);font-weight:300;color:var(--cream);line-height:1.3}
-.connect-arrow{width:15px;height:15px;color:var(--muted);flex-shrink:0;transition:transform .4s cubic-bezier(.16,1,.3,1),color .3s}
-.connect-link:hover .connect-arrow{color:var(--white);transform:translateX(5px)}
+
+.connect-buttons{
+  margin-top:32px;
+  display:flex;
+  align-items:center;
+  gap:22px;
+  flex-wrap:wrap;
+}
+
+.credit-btn{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px 28px;
+  font-family:'Geist Mono',monospace;
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--cream);
+  border:1px solid rgba(255,255,255,0.14);
+  overflow:hidden;
+  isolation:isolate;
+  transition:color .4s ease, border-color .5s ease, letter-spacing .4s ease, transform .5s cubic-bezier(.16,1,.3,1);
+}
+
+.credit-btn::before{
+  content:'';
+  position:absolute;inset:auto 0 0 0;
+  height:0%;
+  background:linear-gradient(to top, rgba(196,168,130,0.16), rgba(196,168,130,0));
+  transition:height .5s cubic-bezier(.16,1,.3,1);
+  z-index:-1;
+}
+.credit-btn:hover::before{height:100%}
+
+.credit-btn::after{
+  content:'';
+  position:absolute;top:0;left:-160%;
+  width:70%;height:100%;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,0.14),transparent);
+  transition:left .85s cubic-bezier(.16,1,.3,1);
+  z-index:-1;
+}
+.credit-btn:hover::after{left:160%}
+
+.credit-btn:hover{
+  color:var(--white);
+  border-color:var(--accent2);
+  letter-spacing:.28em;
+  transform:translateY(-2px);
+}
+
+@media(max-width:900px){
+  #connect{padding:56px 24px}
+  .connect-buttons{gap:14px}
+  .credit-btn{padding:12px 20px;font-size:9px}
+}
  
 /* ANIMATED DIVIDER */
 .section-divider{display:flex;align-items:center;gap:24px;padding:48px 64px}
@@ -449,25 +497,9 @@ Beyond scoring, Lemos has created an extensive catalogue of ambient piano, gener
   <div class="connect-inner">
     <div class="bg-watermark">Explore</div>
     <div class="section-label reveal">Connect &amp; Explore</div>
-    <div class="connect-row reveal">
-      <a href="https://www.imdb.com/name/nm15962386/" target="_blank" rel="noopener" class="connect-link">
-        <div class="connect-link-left">
-          <span class="connect-tag">IMDb</span>
-          <span class="connect-link-text">Film &amp; scoring credits</span>
-        </div>
-        <svg class="connect-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-          <path d="M5 12h14M13 6l6 6-6 6"/>
-        </svg>
-      </a>
-      <a href="https://pt.yamaha.com/pt/audio/music-audio-production/artists/z/ze-to-lemos.html" target="_blank" rel="noopener" class="connect-link">
-        <div class="connect-link-left">
-          <span class="connect-tag" style="border-color:rgba(196,168,130,0.3)">Yamaha</span>
-          <span class="connect-link-text">Official Yamaha Artist</span>
-        </div>
-        <svg class="connect-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-          <path d="M5 12h14M13 6l6 6-6 6"/>
-        </svg>
-      </a>
+    <div class="connect-buttons reveal">
+      <a href="https://www.imdb.com/name/nm15962386/" target="_blank" rel="noopener" class="credit-btn">IMDb</a>
+      <a href="https://pt.yamaha.com/pt/audio/music-audio-production/artists/z/ze-to-lemos.html" target="_blank" rel="noopener" class="credit-btn">Official Yamaha Artist</a>
     </div>
   </div>
 </section>
