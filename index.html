@@ -314,28 +314,8 @@ footer{background:var(--black);padding:30px 64px;border-top:1px solid var(--bord
 
 .instrument-card{
   max-width:1100px;margin:0 auto;position:relative;
-  border:1px solid var(--border);
-  padding:56px;
-  background:
-    linear-gradient(180deg, rgba(196,168,130,0.03), transparent 40%),
-    var(--panel2);
+  padding:56px 64px;
   overflow:hidden;
-  transition:border-color .6s ease, box-shadow .6s ease;
-}
-.instrument-card:hover{
-  border-color:rgba(196,168,130,0.35);
-  box-shadow:0 0 60px -20px rgba(196,168,130,0.18);
-}
-
-.instrument-card::before{
-  content:'';
-  position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size:38px 38px;
-  mask-image:radial-gradient(ellipse at 70% 40%, black 0%, transparent 68%);
-  pointer-events:none;
 }
 
 .eq-viz{
