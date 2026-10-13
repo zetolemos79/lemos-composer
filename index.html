@@ -834,7 +834,7 @@ if(counterEl){
   const counterObs=new IntersectionObserver(entries=>{
     entries.forEach(e=>{
       if(e.isIntersecting){
-        animateCounter(counterEl,150000000,2800);
+        animateCounter(counterEl,200000000,2800);
         counterObs.unobserve(e.target);
       }
     });
